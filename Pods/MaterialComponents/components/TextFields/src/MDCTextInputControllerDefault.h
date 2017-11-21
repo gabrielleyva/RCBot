@@ -72,9 +72,9 @@ extern const CGFloat MDCTextInputDefaultUnderlineActiveHeight;
 @property(class, nonatomic, null_resettable, strong) UIColor *floatingPlaceholderNormalColorDefault;
 
 /**
- When the placeholder floats up, constraints are created that use this value for constants.
+ Where the floating placeholder should arrive when floating up.
  */
-@property(nonatomic, readonly) UIOffset floatingPlaceholderOffset;
+@property(nonatomic, readonly) CGPoint floatingPlaceholderDestination;
 
 /**
  The scale of the the floating placeholder label in comparison to the inline placeholder specified

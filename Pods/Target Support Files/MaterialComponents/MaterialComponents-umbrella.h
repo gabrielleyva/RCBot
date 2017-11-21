@@ -22,8 +22,6 @@
 #import "MDCAppBarContainerViewController.h"
 #import "MaterialBottomAppBar.h"
 #import "MDCBottomAppBarView.h"
-#import "MaterialBottomNavigation.h"
-#import "MDCBottomNavigationBar.h"
 #import "MaterialBottomSheet.h"
 #import "MDCBottomSheetController.h"
 #import "MDCBottomSheetPresentationController.h"
@@ -110,7 +108,6 @@
 #import "MDCTextFieldColorThemer.h"
 #import "MaterialTextFields.h"
 #import "MDCMultilineTextField.h"
-#import "MDCMultilineTextInputDelegate.h"
 #import "MDCTextField.h"
 #import "MDCTextFieldPositioningDelegate.h"
 #import "MDCTextInput.h"
@@ -154,6 +151,10 @@
 #import "MDCOverlayImplementor.h"
 #import "MDCOverlayObserver.h"
 #import "MDCOverlayTransitioning.h"
+#import "MaterialRTL.h"
+#import "MDCRTL.h"
+#import "UIImage+MaterialRTL.h"
+#import "UIView+MaterialRTL.h"
 #import "MDCCurvedCornerTreatment.h"
 #import "MDCCurvedRectShapeGenerator.h"
 #import "MDCPillShapeGenerator.h"
@@ -173,8 +174,6 @@
 #import "MDCNumericValueLabel.h"
 #import "MDCThumbTrack.h"
 #import "MDCThumbView.h"
-#import "MaterialUIMetrics.h"
-#import "MDCLayoutMetrics.h"
 
 FOUNDATION_EXPORT double MaterialComponentsVersionNumber;
 FOUNDATION_EXPORT const unsigned char MaterialComponentsVersionString[];

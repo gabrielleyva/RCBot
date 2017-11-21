@@ -211,7 +211,7 @@ static const CGFloat kButtonInkRadius = 64.0f;
 
 - (void)setSnackbarMessageViewBackgroundColor:(UIColor *)snackbarMessageViewBackgroundColor {
   _snackbarMessageViewBackgroundColor = snackbarMessageViewBackgroundColor;
-  self.backgroundColor = snackbarMessageViewBackgroundColor;
+  _containerView.backgroundColor = snackbarMessageViewBackgroundColor;
 }
 
 - (void)setSnackbarShadowColor:(UIColor *)snackbarMessageViewShadowColor {
@@ -240,14 +240,12 @@ static const CGFloat kButtonInkRadius = 64.0f;
     _message = message;
     _dismissalHandler = [handler copy];
 
-    self.backgroundColor = _snackbarMessageViewBackgroundColor;
+    self.backgroundColor = [UIColor clearColor];
     self.layer.cornerRadius = kCornerRadius;
     self.layer.shadowColor = _snackbarMessageViewShadowColor.CGColor;
     self.layer.shadowOpacity = kShadowAlpha;
     self.layer.shadowOffset = kShadowOffset;
     self.layer.shadowRadius = kShadowSpread;
-
-    _anchoredToScreenEdge = YES;
 
     // Borders are drawn inside of the bounds of a layer. Because our border is translucent, we need
     // to have a view with transparent background and border only (@c self). Inside will be a
@@ -256,7 +254,7 @@ static const CGFloat kButtonInkRadius = 64.0f;
     [self addSubview:_containerView];
 
     [_containerView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    _containerView.backgroundColor = [UIColor clearColor];
+    _containerView.backgroundColor = _snackbarMessageViewBackgroundColor;
     _containerView.layer.cornerRadius = kCornerRadius;
     _containerView.layer.masksToBounds = YES;
 
@@ -345,7 +343,7 @@ static const CGFloat kButtonInkRadius = 64.0f;
                                              : kMaximumViewWidth_iPhone;
 
     // Take into account the content padding.
-    availableTextWidth -= (self.safeContentMargin.left + self.safeContentMargin.right);
+    availableTextWidth -= (kContentMargin.left + kContentMargin.right);
 
     // If there are buttons, account for the padding between the title and the buttons.
     if (message.action) {
@@ -438,17 +436,6 @@ static const CGFloat kButtonInkRadius = 64.0f;
 
 #pragma mark - Constraints and layout
 
-- (void)setAnchoredToScreenEdge:(BOOL)anchoredToScreenEdge {
-  _anchoredToScreenEdge = anchoredToScreenEdge;
-  [self invalidateIntrinsicContentSize];
-
-  if (self.viewConstraints) {
-    [self removeConstraints:self.viewConstraints];
-    self.viewConstraints = nil;
-    [self updateConstraints];
-  }
-}
-
 - (void)updateConstraints {
   [super updateConstraints];
 
@@ -473,13 +460,12 @@ static const CGFloat kButtonInkRadius = 64.0f;
 - (NSArray *)containerViewConstraints {
   NSDictionary *metrics = @{
     @"kBorderMargin" : @(kBorderWidth),
-    @"kBottomMargin" : @(self.safeContentMargin.bottom),
-    @"kLeftMargin" : @(self.safeContentMargin.left),
-    @"kRightMargin" : @(self.safeContentMargin.right),
+    @"kBottomMargin" : @(kContentMargin.bottom),
+    @"kLeftMargin" : @(kContentMargin.left),
+    @"kRightMargin" : @(kContentMargin.right),
     @"kTitleImagePadding" : @(kTitleImagePadding),
-    @"kTopMargin" : @(self.safeContentMargin.top),
+    @"kTopMargin" : @(kContentMargin.top),
     @"kTitleButtonPadding" : @(kTitleButtonPadding),
-    @"kContentSafeBottomInset" : @(kBorderWidth +  self.contentSafeBottomInset),
   };
   NSDictionary *views = @{
     @"container" : self.containerView,
@@ -500,7 +486,7 @@ static const CGFloat kButtonInkRadius = 64.0f;
                                                                              views:views]];
 
   // Pin the top and bottom edges of the container view to the snackbar.
-  formatString = @"V:|-(==kBorderMargin)-[container]-(==kContentSafeBottomInset)-|";
+  formatString = @"V:|-(==kBorderMargin)-[container]-(==kBorderMargin)-|";
   [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:formatString
                                                                            options:0
                                                                            metrics:metrics
@@ -573,11 +559,11 @@ static const CGFloat kButtonInkRadius = 64.0f;
  */
 - (NSArray *)contentViewConstraints {
   NSDictionary *metrics = @{
-    @"kBottomMargin" : @(self.safeContentMargin.bottom),
-    @"kLeftMargin" : @(self.safeContentMargin.left),
-    @"kRightMargin" : @(self.safeContentMargin.right),
+    @"kBottomMargin" : @(kContentMargin.bottom),
+    @"kLeftMargin" : @(kContentMargin.left),
+    @"kRightMargin" : @(kContentMargin.right),
     @"kTitleImagePadding" : @(kTitleImagePadding),
-    @"kTopMargin" : @(self.safeContentMargin.top),
+    @"kTopMargin" : @(kContentMargin.top),
   };
 
   NSMutableDictionary *views = [NSMutableDictionary dictionary];
@@ -645,10 +631,10 @@ static const CGFloat kButtonInkRadius = 64.0f;
   NSMutableArray *constraints = [NSMutableArray array];
 
   NSDictionary *metrics = @{
-    @"kLeftMargin" : @(self.safeContentMargin.left),
-    @"kRightMargin" : @(self.safeContentMargin.right),
-    @"kTopMargin" : @(self.safeContentMargin.top),
-    @"kBottomMargin" : @(self.safeContentMargin.bottom),
+    @"kLeftMargin" : @(kContentMargin.left),
+    @"kRightMargin" : @(kContentMargin.right),
+    @"kTopMargin" : @(kContentMargin.top),
+    @"kBottomMargin" : @(kContentMargin.bottom),
     @"kTitleImagePadding" : @(kTitleImagePadding),
     @"kBorderMargin" : @(kBorderWidth),
     @"kTitleButtonPadding" : @(kTitleButtonPadding),
@@ -734,46 +720,12 @@ static const CGFloat kButtonInkRadius = 64.0f;
   height = MAX(height, self.label.intrinsicContentSize.height);
 
   // Make sure that content margins are included in our calculation.
-  height += self.safeContentMargin.top + self.safeContentMargin.bottom;
+  height += kContentMargin.top + kContentMargin.bottom;
 
   // Make sure that the height of the image and text is larger than the minimum height;
   height = MAX(kMinimumHeight, height);
 
-  height = MAX(kMinimumHeight, height) + self.contentSafeBottomInset;
   return CGSizeMake(UIViewNoIntrinsicMetric, height);
-}
-
-- (CGFloat)contentSafeBottomInset {
-  // If a bottom offset has been set to raise the HUD, e.g. above a tab bar, we should ignore
-  // any safeAreaInsets, since it is no longer 'anchored' to the bottom of the screen. This is set
-  // by the MDCSnackbarOverlayView whenever the bottomOffset is non-zero.
-  if (!self.anchoredToScreenEdge) {
-    return 0;
-  }
-#if defined(__IPHONE_11_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_11_0)
-  if (@available(iOS 11.0, *)) {
-    return self.window.safeAreaInsets.bottom;
-  }
-#endif
-  return 0;
-}
-
-- (UIEdgeInsets)safeContentMargin {
-  UIEdgeInsets contentMargin = kContentMargin;
-
-  UIEdgeInsets safeAreaInsets = UIEdgeInsetsZero;
-#if defined(__IPHONE_11_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_11_0)
-  if (@available(iOS 11.0, *)) {
-    safeAreaInsets = self.window.safeAreaInsets;
-  }
-#endif
-
-  // We only take the left and right safeAreaInsets in to account because the bottom is
-  // handled by contentSafeBottomInset and we will never overlap the top inset.
-  contentMargin.left = MAX(contentMargin.left, safeAreaInsets.left);
-  contentMargin.right = MAX(contentMargin.right, safeAreaInsets.right);
-
-  return contentMargin;
 }
 
 #pragma mark - Event Handlers

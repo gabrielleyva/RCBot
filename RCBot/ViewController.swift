@@ -6,6 +6,11 @@
 //  Copyright © 2017 Leyva Merino & Phadate. All rights reserved.
 //
 
+/*
+ SSH password to raspberry pi is 12345
+ To find raspberry ip is $ hostname -I 
+ */
+
 import UIKit
 import WebKit
 import MaterialComponents
@@ -30,12 +35,12 @@ class ViewController: UIViewController, WKNavigationDelegate{
     }
     
     func prepareRightButton() {
-        rightButton.backgroundColor = .newBlue
+        rightButton.backgroundColor = .newGreen
         rightButton.setTitleColor(.white, for: .normal)
     }
     
     func prepareLeftButton() {
-        leftButton.backgroundColor = .newGreen
+        leftButton.backgroundColor = .newRed
         leftButton.setTitleColor(.white, for: .normal)
     }
     
