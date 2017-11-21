@@ -1,0 +1,6 @@
+framework module Pods_RCBot {
+  umbrella header "Pods-RCBot-umbrella.h"
+
+  export *
+  module * { export * }
+}

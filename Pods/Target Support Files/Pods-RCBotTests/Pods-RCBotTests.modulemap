@@ -1,0 +1,6 @@
+framework module Pods_RCBotTests {
+  umbrella header "Pods-RCBotTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
