@@ -48,23 +48,58 @@
                                     <action selector="rightButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9hz-no-raY"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cp0-Ce-o3B">
+                                <rect key="frame" x="67" y="269" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kgG-lp-NMy">
+                                <rect key="frame" x="166" y="323" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p12-PV-rMt">
+                                <rect key="frame" x="166" y="352" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eDE-LX-VmU">
+                                <rect key="frame" x="166" y="294" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Sbc-ab-TQB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="4Ae-VO-mrP"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="9xa-sY-Kx1" secondAttribute="bottom" constant="20" id="6dw-xR-exP"/>
+                            <constraint firstItem="p12-PV-rMt" firstAttribute="centerX" secondItem="kgG-lp-NMy" secondAttribute="centerX" id="6lm-wy-LxN"/>
                             <constraint firstItem="Sbc-ab-TQB" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="A2E-cd-vBL"/>
+                            <constraint firstItem="kgG-lp-NMy" firstAttribute="top" secondItem="eDE-LX-VmU" secondAttribute="bottom" constant="8" id="BDU-S0-44F"/>
+                            <constraint firstItem="kgG-lp-NMy" firstAttribute="centerY" secondItem="cp0-Ce-o3B" secondAttribute="centerY" id="C1z-5y-hdQ"/>
+                            <constraint firstItem="eDE-LX-VmU" firstAttribute="centerX" secondItem="kgG-lp-NMy" secondAttribute="centerX" id="Dlg-Tv-pEu"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Hw0-CF-Yhh" secondAttribute="bottom" constant="20" id="Hiu-TR-65A"/>
+                            <constraint firstItem="p12-PV-rMt" firstAttribute="top" secondItem="kgG-lp-NMy" secondAttribute="bottom" constant="8" id="PID-jw-HnS"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9xa-sY-Kx1" secondAttribute="trailing" constant="16" id="SFg-NK-HZz"/>
+                            <constraint firstItem="cp0-Ce-o3B" firstAttribute="centerX" secondItem="Sbc-ab-TQB" secondAttribute="centerX" id="a06-LA-OOI"/>
+                            <constraint firstItem="cp0-Ce-o3B" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="249" id="aXR-vL-U5o"/>
                             <constraint firstItem="Sbc-ab-TQB" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="dvu-rh-znI"/>
+                            <constraint firstItem="kgG-lp-NMy" firstAttribute="centerX" secondItem="cp0-Ce-o3B" secondAttribute="centerX" id="g9a-df-2iZ"/>
                             <constraint firstItem="Sbc-ab-TQB" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="mY6-EH-R1t"/>
+                            <constraint firstItem="cp0-Ce-o3B" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="67" id="moM-v6-HNS"/>
+                            <constraint firstItem="cp0-Ce-o3B" firstAttribute="centerY" secondItem="Sbc-ab-TQB" secondAttribute="centerY" id="nVB-LO-6Mc"/>
                             <constraint firstItem="Hw0-CF-Yhh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="uAw-md-Zb9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="direction" destination="eDE-LX-VmU" id="P8z-pU-bfM"/>
                         <outlet property="leftButton" destination="Hw0-CF-Yhh" id="ov2-T7-hsd"/>
                         <outlet property="rightButton" destination="9xa-sY-Kx1" id="pjq-kR-axO"/>
+                        <outlet property="temp" destination="kgG-lp-NMy" id="Mfc-qy-iTA"/>
+                        <outlet property="temp2" destination="p12-PV-rMt" id="jYE-QR-Gqj"/>
                         <outlet property="webView" destination="Sbc-ab-TQB" id="fH6-wZ-gJf"/>
                     </connections>
                 </viewController>
