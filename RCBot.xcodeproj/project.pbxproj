@@ -15,6 +15,9 @@
 		C046424C1FC3E2A7008BE4C5 /* RCBotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C046424B1FC3E2A7008BE4C5 /* RCBotTests.swift */; };
 		C04642571FC3E2A7008BE4C5 /* RCBotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04642561FC3E2A7008BE4C5 /* RCBotUITests.swift */; };
 		C04642651FC3F163008BE4C5 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04642641FC3F163008BE4C5 /* Colors.swift */; };
+		C06C8CD41FCF7E010030670D /* MotionCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06C8CD31FCF7E010030670D /* MotionCalculator.swift */; };
+		C06C8CD61FCF81BB0030670D /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06C8CD51FCF81BB0030670D /* ViewModel.swift */; };
+		C06C8CDA1FCF8D850030670D /* MotionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06C8CD91FCF8D850030670D /* MotionModel.swift */; };
 		C6EC9A35BDE3C8369194B8BC /* Pods_RCBot.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB3A0961FC7C6BD7940CD4DD /* Pods_RCBot.framework */; };
 		CEF3D4FDA74C8A60024E2BFD /* Pods_RCBotUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E34BB5819B630DD9763534D0 /* Pods_RCBotUITests.framework */; };
 		E0CA19AF4E9AD2EF16D98673 /* Pods_RCBotTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 309E894471D487F9C454C11A /* Pods_RCBotTests.framework */; };
@@ -60,6 +63,9 @@
 		C04642561FC3E2A7008BE4C5 /* RCBotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCBotUITests.swift; sourceTree = "<group>"; };
 		C04642581FC3E2A7008BE4C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C04642641FC3F163008BE4C5 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		C06C8CD31FCF7E010030670D /* MotionCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionCalculator.swift; sourceTree = "<group>"; };
+		C06C8CD51FCF81BB0030670D /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		C06C8CD91FCF8D850030670D /* MotionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionModel.swift; sourceTree = "<group>"; };
 		E34BB5819B630DD9763534D0 /* Pods_RCBotUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RCBotUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -127,12 +133,14 @@
 			isa = PBXGroup;
 			children = (
 				C04642361FC3E2A7008BE4C5 /* AppDelegate.swift */,
-				C04642381FC3E2A7008BE4C5 /* ViewController.swift */,
+				C06C8CDF1FCF978D0030670D /* Extensions */,
+				C06C8CDE1FCF97730030670D /* ViewControllers */,
+				C06C8CDD1FCF97670030670D /* ViewModels */,
+				C06C8CDB1FCF96E70030670D /* Models */,
 				C046423A1FC3E2A7008BE4C5 /* Main.storyboard */,
-				C046423D1FC3E2A7008BE4C5 /* Assets.xcassets */,
 				C046423F1FC3E2A7008BE4C5 /* LaunchScreen.storyboard */,
+				C046423D1FC3E2A7008BE4C5 /* Assets.xcassets */,
 				C04642421FC3E2A7008BE4C5 /* Info.plist */,
-				C04642641FC3F163008BE4C5 /* Colors.swift */,
 			);
 			path = RCBot;
 			sourceTree = "<group>";
@@ -153,6 +161,39 @@
 				C04642581FC3E2A7008BE4C5 /* Info.plist */,
 			);
 			path = RCBotUITests;
+			sourceTree = "<group>";
+		};
+		C06C8CDB1FCF96E70030670D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C06C8CD31FCF7E010030670D /* MotionCalculator.swift */,
+				C06C8CD91FCF8D850030670D /* MotionModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C06C8CDD1FCF97670030670D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				C06C8CD51FCF81BB0030670D /* ViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		C06C8CDE1FCF97730030670D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				C04642381FC3E2A7008BE4C5 /* ViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		C06C8CDF1FCF978D0030670D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C04642641FC3F163008BE4C5 /* Colors.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		F50B0906853CDC7ACDA41D57 /* Pods */ = {
@@ -337,7 +378,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		53D55A54C302D8998FE7D1E3 /* [CP] Copy Pods Resources */ = {
@@ -370,7 +411,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		9138D36E9F55F4E5A4D89426 /* [CP] Check Pods Manifest.lock */ = {
@@ -388,7 +429,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		98D7EDA95F67587E7FD0D6E8 /* [CP] Embed Pods Frameworks */ = {
@@ -469,7 +510,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C06C8CD61FCF81BB0030670D /* ViewModel.swift in Sources */,
 				C04642391FC3E2A7008BE4C5 /* ViewController.swift in Sources */,
+				C06C8CD41FCF7E010030670D /* MotionCalculator.swift in Sources */,
+				C06C8CDA1FCF8D850030670D /* MotionModel.swift in Sources */,
 				C04642651FC3F163008BE4C5 /* Colors.swift in Sources */,
 				C04642371FC3E2A7008BE4C5 /* AppDelegate.swift in Sources */,
 			);
@@ -639,7 +683,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = D6KDC363XA;
+				DEVELOPMENT_TEAM = BFP4MM8ANM;
 				INFOPLIST_FILE = RCBot/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -656,7 +700,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = D6KDC363XA;
+				DEVELOPMENT_TEAM = BFP4MM8ANM;
 				INFOPLIST_FILE = RCBot/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

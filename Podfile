@@ -7,6 +7,8 @@ target 'RCBot' do
 
   # Pods for RCBot
   pod 'MaterialComponents'
+  pod 'Alamofire', '~> 4.5'
+  pod 'ObjectMapper'  
 
   target 'RCBotTests' do
     inherit! :search_paths
