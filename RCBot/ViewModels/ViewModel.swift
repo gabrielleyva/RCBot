@@ -20,11 +20,33 @@ class ViewModel: NSObject {
     func updateMotion(parameters: [String: Any]) {
         let url = ip + "/updateMotion"
         Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
-            .responseJSON { response in
-                print(response)
-        }
 
     }
+    
+    func rotateServo(parameters: [String: Any]) {
+        let url = ip + "/rotateServo"
+        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+        
+    }
+    
+    func getData(id: String, completionHandler: @escaping ([String : Any]?, Error?) -> ()){
+        makeDataCall(completionHandler: completionHandler)
+    }
+    
+    func makeDataCall(completionHandler: @escaping ([String : Any]?, Error?) -> ()){
+        let url = ip + "/getData"
+        
+        Alamofire.request(url).responseJSON
+            { response in
+                switch response.result {
+                case .success(let value):
+                    completionHandler(value as? [String : Any], nil)
+                case .failure(let error):
+                    completionHandler(nil, error)
+                }
+        }
+    }
+    
     
 
 }

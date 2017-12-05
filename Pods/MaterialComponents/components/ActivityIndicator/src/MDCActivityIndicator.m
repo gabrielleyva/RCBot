@@ -18,7 +18,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-#import "MaterialRTL.h"
+#import "MDFInternationalization.h"
 #import "MaterialApplication.h"
 #import "private/MDCActivityIndicator+Private.h"
 #import "private/MaterialActivityIndicatorStrings.h"
@@ -153,7 +153,7 @@ static const CGFloat kSingleCycleRotation =
 
   // The activity indicator reflects the passage of time (a spatial semantic context) and so
   // will not be mirrored in RTL languages.
-  self.mdc_semanticContentAttribute = UISemanticContentAttributeSpatial;
+  self.mdf_semanticContentAttribute = UISemanticContentAttributeSpatial;
 
   _cycleStartIndex = 0;
   _indicatorMode = MDCActivityIndicatorModeIndeterminate;
@@ -207,6 +207,9 @@ static const CGFloat kSingleCycleRotation =
 
 - (void)startAnimating {
   if (_animatingOut) {
+    if ([_delegate respondsToSelector:@selector(activityIndicatorAnimationDidFinish:)]) {
+      [_delegate activityIndicatorAnimationDidFinish:self];
+    }
     [self removeAnimations];
   }
 
@@ -781,6 +784,11 @@ static const CGFloat kSingleCycleRotation =
   _animatingOut = NO;
   [_strokeLayer removeAllAnimations];
   [_outerRotationLayer removeAllAnimations];
+
+  // Reset current and latest progress, to ensure addProgressAnimationIfRequired adds a progress animation
+  // when returning from hidden.
+  _currentProgress = 0;
+  _lastProgress = 0;
 
   // Reset cycle count to 0 rather than cycleStart to reflect default starting position (top).
   _cycleCount = 0;
