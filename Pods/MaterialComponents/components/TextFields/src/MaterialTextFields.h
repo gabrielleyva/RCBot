@@ -28,4 +28,3 @@
 #import "MDCTextInputControllerFilled.h"
 #import "MDCTextInputUnderlineView.h"
 #import "MDCMultilineTextField.h"
-#import "MDCMultilineTextInputDelegate.h"

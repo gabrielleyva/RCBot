@@ -43,7 +43,7 @@ typedef NS_ENUM(NSUInteger, MDMMotionCurveType) {
   /**
    The default curve will be used.
    */
-  MDMMotionCurveTypeDefault __deprecated_enum_msg("Use MDMMotionCurveTypeBezier instead."),
+  MDMMotionCurveTypeDefault,
 
 } NS_SWIFT_NAME(MotionCurveType);
 
@@ -95,15 +95,6 @@ FOUNDATION_EXTERN MDMMotionCurve MDMMotionCurveMakeSpring(float mass, float tens
 // clang-format on
 
 /**
- For cubic bezier curves, returns a reversed cubic bezier curve. For all other curve types, a copy
- of the original curve is returned.
- */
-// clang-format off
-FOUNDATION_EXTERN MDMMotionCurve MDMMotionCurveReversedBezier(MDMMotionCurve motionCurve)
-    NS_SWIFT_NAME(MotionCurveReversedBezier(fromMotionCurve:));
-// clang-format on
-
-/**
  Named indices for the bezier motion curve's data array.
  */
 typedef NS_ENUM(NSUInteger, MDMBezierMotionCurveDataIndex) {
@@ -119,18 +110,7 @@ typedef NS_ENUM(NSUInteger, MDMBezierMotionCurveDataIndex) {
 typedef NS_ENUM(NSUInteger, MDMSpringMotionCurveDataIndex) {
   MDMSpringMotionCurveDataIndexMass,
   MDMSpringMotionCurveDataIndexTension,
-  MDMSpringMotionCurveDataIndexFriction,
-
-  /**
-   The initial velocity of the animation.
-
-   A value of zero indicates no initial velocity.
-   A positive value indicates movement toward the destination.
-   A negative value indicates movement away from the destination.
-
-   The value's units are dependent on the context and the value being animated.
-   */
-  MDMSpringMotionCurveDataIndexInitialVelocity
+  MDMSpringMotionCurveDataIndexFriction
 } NS_SWIFT_NAME(SpringMotionCurveDataIndex);
 
 // Objective-C-specific macros
@@ -151,11 +131,6 @@ typedef NS_ENUM(NSUInteger, MDMSpringMotionCurveDataIndex) {
               tension,                      \
               friction }                    \
   }
-
-/**
- A linear bezier motion curve.
- */
-#define MDMLinearMotionCurve _MDMBezier(0, 0, 1, 1)
 
 /**
  Timing information for an iOS modal presentation slide animation.

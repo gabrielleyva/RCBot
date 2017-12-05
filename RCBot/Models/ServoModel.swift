@@ -10,14 +10,14 @@ import ObjectMapper
 
 class ServoModel: Mappable {
     
-    var angle: Float?
+    var angle: Int?
 
     required init?(map: Map) {
         
     }
     
     required init?() {
-        angle = 50.0
+        angle = 90
     }
     
     // Mappable

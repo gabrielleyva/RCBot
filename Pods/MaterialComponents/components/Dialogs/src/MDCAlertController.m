@@ -17,8 +17,8 @@
 #import "MDCAlertController.h"
 
 #import "MDCDialogTransitionController.h"
-#import "MDFInternationalization.h"
 #import "MaterialButtons.h"
+#import "MaterialRTL.h"
 #import "MaterialTypography.h"
 #import "private/MaterialDialogsStrings.h"
 #import "private/MaterialDialogsStrings_table.h"
@@ -432,11 +432,12 @@ static const CGFloat MDCDialogMessageOpacity = 0.54f;
       }
     }
     // Handle RTL
-    if (self.view.mdf_effectiveUserInterfaceLayoutDirection ==
+    if (self.view.mdc_effectiveUserInterfaceLayoutDirection ==
         UIUserInterfaceLayoutDirectionRightToLeft) {
       for (UIButton *button in self.actionButtons) {
-        CGRect flippedRect =
-          MDFRectFlippedHorizontally(button.frame, CGRectGetWidth(self.view.bounds));
+        CGRect buttonRect = button.frame;
+        CGRect flippedRect = MDCRectFlippedForRTL(buttonRect, CGRectGetWidth(self.view.bounds),
+                                                  UIUserInterfaceLayoutDirectionRightToLeft);
         button.frame = flippedRect;
       }
     }
@@ -461,7 +462,7 @@ static const CGFloat MDCDialogMessageOpacity = 0.54f;
   } else {
     // Complex layout case : Split the space between the two scrollviews
     if (CGRectGetHeight(contentScrollViewRect) < CGRectGetHeight(self.view.bounds) * 0.5f) {
-      actionsScrollViewRect.size.height =
+      actionsScrollViewRect.size.height = 
           CGRectGetHeight(self.view.bounds) - contentScrollViewRect.size.height;
     } else {
       CGFloat maxActionsHeight = CGRectGetHeight(self.view.bounds) * 0.5f;

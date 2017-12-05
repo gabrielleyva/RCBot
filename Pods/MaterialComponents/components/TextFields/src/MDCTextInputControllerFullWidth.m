@@ -25,6 +25,7 @@
 #import "MaterialAnimationTiming.h"
 #import "MaterialMath.h"
 #import "MaterialPalettes.h"
+#import "MaterialRTL.h"
 #import "MaterialTypography.h"
 
 static const CGFloat MDCTextInputFullWidthHintTextOpacity = 0.54f;
@@ -415,6 +416,22 @@ static UIFont *_trailingUnderlineLabelFontDefault;
   }
 }
 
+- (UIRectCorner)roundedCorners {
+  return 0;
+}
+
+- (void)setRoundedCorners:(__unused UIRectCorner)roundedCorners {
+  // Not implemented. There are no corners to round.
+}
+
++ (UIRectCorner)roundedCornersDefault {
+  return 0;
+}
+
++ (void)setRoundedCornersDefault:(__unused UIRectCorner)roundedCornersDefault {
+  // Not implemented. There are no corners to round.
+}
+
 - (void)setDisabledColor:(__unused UIColor *)disabledColor {
   [self updateUnderline];
 }
@@ -594,39 +611,12 @@ static UIFont *_trailingUnderlineLabelFontDefault;
   return [UIColor clearColor];
 }
 
-- (NSString *)placeholderText {
-  return _textInput.placeholder;
-}
-
-- (void)setPlaceholderText:(NSString *)placeholderText {
-  if ([_textInput.placeholder isEqualToString: placeholderText]) {
-    return;
-  }
-  _textInput.placeholder = [placeholderText copy];
-}
-
 - (void)setPreviousLeadingText:(NSString *)previousLeadingText {
   _previousLeadingText = [previousLeadingText copy];
 }
 
 - (void)setPreviousPlaceholderColor:(UIColor *)previousPlaceholderColor {
   _previousPlaceholderColor = previousPlaceholderColor;
-}
-
-- (UIRectCorner)roundedCorners {
-  return 0;
-}
-
-- (void)setRoundedCorners:(__unused UIRectCorner)roundedCorners {
-  // Not implemented. There are no corners to round.
-}
-
-+ (UIRectCorner)roundedCornersDefault {
-  return 0;
-}
-
-+ (void)setRoundedCornersDefault:(__unused UIRectCorner)roundedCornersDefault {
-  // Not implemented. There are no corners to round.
 }
 
 - (void)setTextInput:(UIView<MDCTextInput> *)textInput {

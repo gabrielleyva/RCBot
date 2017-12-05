@@ -19,18 +19,17 @@ import WebKit
 import MaterialComponents
 import Foundation
 import CoreMotion
-import CircularSlider
 import ObjectMapper
+import CircularSlider
 
- var ip = "http://10.8.70.55:50002"
+ var ip = "http://10.8.70.55:5000"
 
-class ViewController: UIViewController, WKNavigationDelegate{
+class ViewController: UIViewController, WKNavigationDelegate, CircularSliderDelegate{
 
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var humidityLabel: UILabel!
-    @IBOutlet weak var brightnessLabel: UILabel!
-    @IBOutlet weak var slider: UISlider!
+    @IBOutlet weak var transView: UIView!
     @IBOutlet weak var sensorButton: MDCRaisedButton!
     
     
@@ -40,7 +39,7 @@ class ViewController: UIViewController, WKNavigationDelegate{
     var viewModel: ViewModel?
     var dataModel: DataModel?
     var servoModel: ServoModel?
-
+    var circleSlider: CircularSlider?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,9 +47,47 @@ class ViewController: UIViewController, WKNavigationDelegate{
         self.loadCameraView()
         self.prepareMotionCalculator()
         self.scheduledTimerWithTimeInterval()
+        
+        self.prepareSlider()
+        self.prepareSensorButton()
+        self.prepareTransView()
+        self.prepareLabels()
+        
         viewModel = ViewModel()
         servoModel = ServoModel()
+  
+    }
+    
+    func prepareLabels() {
+        tempLabel.textColor = .newRed
+        humidityLabel.textColor = .newRed
+    }
+    
+    func prepareTransView() {
+        transView.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.5)
+    }
+    
+    func prepareSensorButton() {
+        sensorButton.backgroundColor = .newGreen
+        sensorButton.setTitleColor(.white, for: .normal)
+    }
+    
+    func prepareSlider() {
+        let frame = CGRect(x:  self.view.frame.width - 225, y: self.view.frame.height - 225, width: 200, height: 200)
+        circleSlider = CircularSlider(frame: frame)
+        circleSlider?.setValue(90, animated: true)
+        circleSlider?.maximumValue = 165
+        circleSlider?.minimumValue = 15
+        circleSlider?.backgroundColor = .clear
+        circleSlider?.delegate = self
+        circleSlider?.title = "Degrees"
+        circleSlider?.bgColor = .lightGray
+        circleSlider?.pgNormalColor = .newBlue
+        circleSlider?.pgHighlightedColor = .newBlue
+        circleSlider?.tintColor = .newBlue
+        circleSlider?.knobRadius = 50
         
+        self.view.addSubview(circleSlider!)
     }
 
     override func didReceiveMemoryWarning() {
@@ -85,21 +122,21 @@ class ViewController: UIViewController, WKNavigationDelegate{
         self.motionCalculator?.motionManager.stopDeviceMotionUpdates()
     }
     
-    @IBAction func sliderValueDidChange(_ sender: Any) {
-        self.servoModel?.angle = self.slider.value
-        let data = self.getJSON()
-        viewModel?.updateMotion(parameters: data)
-        
-    }
-    
     @IBAction func sensorButtonPressed(_ sender: Any) {
         self.viewModel?.getData(id: "10") { responseObject, error in
             self.dataModel = DataModel(JSON: responseObject!)
-            self.humidityLabel.text = "Humidity: " + (self.dataModel?.humidity)!
-            self.tempLabel.text = "Temperature: " + (self.dataModel?.temprature)!
-            self.brightnessLabel.text = "Brightness: " + (self.dataModel?.light)!
+            self.humidityLabel.text = " Humidity: " + (self.dataModel?.humidity)!
+            self.tempLabel.text = " Temperature: " + (self.dataModel?.temperature)!
         }
     
+    }
+    
+    func circularSlider(_ circularSlider: CircularSlider, valueForValue value: Float) -> Float {
+        self.servoModel?.angle = Int(value)
+        let data = self.getJSON()
+        print(data)
+        viewModel?.rotateServo(parameters: data)
+        return floorf(value)
     }
     
     func getJSON() -> [String: Any] {
@@ -121,6 +158,7 @@ class ViewController: UIViewController, WKNavigationDelegate{
         return nil
     }
     
+
     
 }
 

@@ -9,7 +9,8 @@ target 'RCBot' do
   pod 'MaterialComponents'
   pod 'Alamofire', '~> 4.5'
   pod 'ObjectMapper'  
-  pod 'CircularSlider'
+  pod 'HGCircularSlider', '~> 2.0.0'
+  pod 'CircularSlider' 
 
   target 'RCBotTests' do
     inherit! :search_paths

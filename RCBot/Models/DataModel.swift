@@ -11,10 +11,8 @@ import ObjectMapper
 
 class DataModel: Mappable {
     
-    var temprature: String?
+    var temperature: String?
     var humidity: String?
-    var light: String?
-
     
     required init?(map: Map) {
         
@@ -22,8 +20,7 @@ class DataModel: Mappable {
     
     // Mappable
     func mapping(map: Map) {
-        temprature <- map["temprature"]
-        light <- map["light"]
+        temperature <- map["temperature"]
         humidity <- map["humidity"]
     }
 }
