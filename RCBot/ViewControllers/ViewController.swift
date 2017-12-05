@@ -27,10 +27,14 @@ class ViewController: UIViewController, WKNavigationDelegate{
     @IBOutlet weak var leftButton: MDCFloatingButton!
     @IBOutlet weak var rightButton: MDCFloatingButton!
     @IBOutlet weak var webView: WKWebView!
+    @IBOutlet weak var tempLabel: UILabel!
+    @IBOutlet weak var humidityLabel: UILabel!
+    @IBOutlet weak var brightnessLabel: UILabel!
     
     var motionCalculator:MotionCalculator?
     var timer = Timer()
     var viewModel: ViewModel?
+    var data = DataModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +43,8 @@ class ViewController: UIViewController, WKNavigationDelegate{
         self.prepareRightButton()
         self.prepareLeftButton()
         self.prepareMotionCalculator()
+        self.prepareLabels()
+        data.startUpdates(with: 1)
         self.scheduledTimerWithTimeInterval()
         viewModel = ViewModel()
     }
@@ -61,6 +67,12 @@ class ViewController: UIViewController, WKNavigationDelegate{
     func prepareMotionCalculator() {
         motionCalculator = MotionCalculator()
         motionCalculator?.didInit()
+    }
+    
+    func prepareLabels() {
+        tempLabel.text = self.data.temprature
+        humidityLabel.text = self.data.humidity
+        brightnessLabel.text = self.data.light
     }
     
     func prepareRightButton() {

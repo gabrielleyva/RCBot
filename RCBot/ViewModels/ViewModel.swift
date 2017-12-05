@@ -14,7 +14,7 @@ import ObjectMapper
 class ViewModel: NSObject {
     
     override init() {
-
+ 
     }
 
     func updateMotion(parameters: [String: Any]) {

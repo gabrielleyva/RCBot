@@ -19,10 +19,10 @@
 
 #import "MDCItemBarStringConstants.h"
 #import "MDCItemBarStyle.h"
-#import "MDFInternationalization.h"
 #import "MaterialAnimationTiming.h"
 #import "MaterialInk.h"
 #import "MaterialMath.h"
+#import "MaterialRTL.h"
 #import "MaterialTypography.h"
 
 /// Size of image in points.
@@ -245,7 +245,7 @@ static const NSTimeInterval kSelectionAnimationDuration = 0.3f;
 
   if (_style.shouldDisplayBadge) {
     CGFloat badgeOffset = (imageBounds.size.width / 2) + (badgeSize.width / 2);
-    if (self.mdf_effectiveUserInterfaceLayoutDirection ==
+    if (self.mdc_effectiveUserInterfaceLayoutDirection ==
         UIUserInterfaceLayoutDirectionRightToLeft) {
       badgeOffset *= -1;
     }
@@ -563,7 +563,9 @@ static const NSTimeInterval kSelectionAnimationDuration = 0.3f;
 }
 
 - (void)updateDisplayedTitle {
-  _titleLabel.text = [[self class] displayedTitleForTitle:_title style:_style];
+  if (!_titleLabel.hidden) {
+    _titleLabel.text = [[self class] displayedTitleForTitle:_title style:_style];
+  }
 }
 
 @end

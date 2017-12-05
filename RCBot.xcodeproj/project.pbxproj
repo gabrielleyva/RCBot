@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9BC3AA6D1FD627BE00FBFD28 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC3AA6C1FD627BE00FBFD28 /* DataModel.swift */; };
 		C04642371FC3E2A7008BE4C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04642361FC3E2A7008BE4C5 /* AppDelegate.swift */; };
 		C04642391FC3E2A7008BE4C5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04642381FC3E2A7008BE4C5 /* ViewController.swift */; };
 		C046423C1FC3E2A7008BE4C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C046423A1FC3E2A7008BE4C5 /* Main.storyboard */; };
@@ -46,6 +47,7 @@
 		3AC9204798FBD1051C5159A2 /* Pods-RCBot.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RCBot.release.xcconfig"; path = "Pods/Target Support Files/Pods-RCBot/Pods-RCBot.release.xcconfig"; sourceTree = "<group>"; };
 		484CEF64AAF424B11772AC47 /* Pods-RCBotUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RCBotUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RCBotUITests/Pods-RCBotUITests.release.xcconfig"; sourceTree = "<group>"; };
 		923AB186F4A0C98638D7CF45 /* Pods-RCBot.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RCBot.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RCBot/Pods-RCBot.debug.xcconfig"; sourceTree = "<group>"; };
+		9BC3AA6C1FD627BE00FBFD28 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		A7A12814AB6D4852CF53CBE4 /* Pods-RCBotUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RCBotUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RCBotUITests/Pods-RCBotUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B8571592702A24ACB7C437A1 /* Pods-RCBotTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RCBotTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RCBotTests/Pods-RCBotTests.debug.xcconfig"; sourceTree = "<group>"; };
 		BB3A0961FC7C6BD7940CD4DD /* Pods_RCBot.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RCBot.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,6 +170,7 @@
 			children = (
 				C06C8CD31FCF7E010030670D /* MotionCalculator.swift */,
 				C06C8CD91FCF8D850030670D /* MotionModel.swift */,
+				9BC3AA6C1FD627BE00FBFD28 /* DataModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -378,7 +381,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		53D55A54C302D8998FE7D1E3 /* [CP] Copy Pods Resources */ = {
@@ -411,7 +414,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9138D36E9F55F4E5A4D89426 /* [CP] Check Pods Manifest.lock */ = {
@@ -429,7 +432,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		98D7EDA95F67587E7FD0D6E8 /* [CP] Embed Pods Frameworks */ = {
@@ -439,19 +442,23 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-RCBot/Pods-RCBot-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
 				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
 				"${BUILT_PRODUCTS_DIR}/MotionAnimator/MotionAnimator.framework",
 				"${BUILT_PRODUCTS_DIR}/MotionInterchange/MotionInterchange.framework",
 				"${BUILT_PRODUCTS_DIR}/MotionTransitioning/MotionTransitioning.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MotionAnimator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MotionInterchange.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MotionTransitioning.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -510,6 +517,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BC3AA6D1FD627BE00FBFD28 /* DataModel.swift in Sources */,
 				C06C8CD61FCF81BB0030670D /* ViewModel.swift in Sources */,
 				C04642391FC3E2A7008BE4C5 /* ViewController.swift in Sources */,
 				C06C8CD41FCF7E010030670D /* MotionCalculator.swift in Sources */,

@@ -18,15 +18,14 @@
 
 #import "MDCAppBarContainerViewController.h"
 
-#import "MDFInternationalization.h"
-#import "MDFTextAccessibility.h"
 #import "MaterialApplication.h"
 #import "MaterialFlexibleHeader.h"
 #import "MaterialIcons+ic_arrow_back.h"
+#import "MaterialRTL.h"
 #import "MaterialShadowElevations.h"
 #import "MaterialShadowLayer.h"
 #import "MaterialTypography.h"
-#import "MaterialUIMetrics.h"
+#import "MDFTextAccessibility.h"
 #import "private/MaterialAppBarStrings.h"
 #import "private/MaterialAppBarStrings_table.h"
 
@@ -35,6 +34,7 @@ static NSString *const kStatusBarHeightKey = @"statusBarHeight";
 static NSString *const MDCAppBarHeaderViewControllerKey = @"MDCAppBarHeaderViewControllerKey";
 static NSString *const MDCAppBarNavigationBarKey = @"MDCAppBarNavigationBarKey";
 static NSString *const MDCAppBarHeaderStackViewKey = @"MDCAppBarHeaderStackViewKey";
+static const CGFloat kPreIOS11StatusBarHeight = 20;
 
 // The Bundle for string resources.
 static NSString *const kMaterialAppBarBundle = @"MaterialAppBar.bundle";
@@ -253,9 +253,9 @@ static NSString *const kMaterialAppBarBundle = @"MaterialAppBar.bundle";
   if (!backBarButtonItem) {
     UIImage *backButtonImage = [MDCIcons imageFor_ic_arrow_back];
     backButtonImage = [backButtonImage imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    if (self.navigationBar.mdf_effectiveUserInterfaceLayoutDirection ==
+    if (self.navigationBar.mdc_effectiveUserInterfaceLayoutDirection ==
         UIUserInterfaceLayoutDirectionRightToLeft) {
-      backButtonImage = [backButtonImage mdf_imageWithHorizontallyFlippedOrientation];
+      backButtonImage = [backButtonImage mdc_imageFlippedForRightToLeftLayoutDirection];
     }
     backBarButtonItem = [[UIBarButtonItem alloc] initWithImage:backButtonImage
                                                          style:UIBarButtonItemStyleDone
@@ -310,7 +310,17 @@ static NSString *const kMaterialAppBarBundle = @"MaterialAppBar.bundle";
                             views:@{kBarStackKey : self.headerStackView}];
   [self.view addConstraints:horizontalConstraints];
 
-  CGFloat topMargin = MDCDeviceTopSafeAreaInset();
+  CGFloat topMargin = kPreIOS11StatusBarHeight;
+#if defined(__IPHONE_11_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_11_0)
+  if (@available(iOS 11.0, *)) {
+    // We only get the actual status bar height if we're on iOS 11, because previously we were not
+    // adjusting the header height to make it smaller when the status bar is hidden.
+    // Note: We should switch to using self.view.safeAreaLayoutGuide.topAnchor once 11.1 is
+    // the min iOS 11 we support. 11.0 has a bug where the Safe Area is incorrectly calculated for
+    // this view.
+    topMargin = CGRectGetMaxY([UIApplication mdc_safeSharedApplication].statusBarFrame);
+  }
+#endif
   _verticalConstraint = [NSLayoutConstraint constraintWithItem:self.headerStackView
                                                      attribute:NSLayoutAttributeTop
                                                      relatedBy:NSLayoutRelationEqual
@@ -343,9 +353,10 @@ static NSString *const kMaterialAppBarBundle = @"MaterialAppBar.bundle";
 
 #if defined(__IPHONE_11_0) && (__IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_11_0)
   if (@available(iOS 11.0, *)) {
-    // We only update the top inset on iOS 11 because previously we were not adjusting the header
-    // height to make it smaller when the status bar is hidden.
-    _verticalConstraint.constant = MDCDeviceTopSafeAreaInset();
+    // We only get the actual status bar height if we're on iOS 11, because previously we were not
+    // adjusting the header height to make it smaller when the status bar is hidden.
+    _verticalConstraint.constant =
+        CGRectGetMaxY([UIApplication mdc_safeSharedApplication].statusBarFrame);
   }
 #endif
 }
