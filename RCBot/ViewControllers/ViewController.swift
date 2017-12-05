@@ -20,7 +20,7 @@ import MaterialComponents
 import Foundation
 import CoreMotion
 
- var ip = "http://10.8.69.209:5000/"
+ var ip = "http://10.8.70.55:5000/"
 
 class ViewController: UIViewController, WKNavigationDelegate{
 
@@ -76,7 +76,7 @@ class ViewController: UIViewController, WKNavigationDelegate{
     func loadCameraView() {
         print("Called")
         webView.navigationDelegate = self
-        let url = URL(string: "http://10.8.69.209:5000")!
+        let url = URL(string: ip)!
         webView.load(URLRequest(url: url))
     }
 
