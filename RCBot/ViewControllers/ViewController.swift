@@ -65,6 +65,7 @@ class ViewController: UIViewController, WKNavigationDelegate, CircularSliderDele
     
     func prepareTransView() {
         transView.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.5)
+        transView.layer.cornerRadius = 5
     }
     
     func prepareSensorButton() {
@@ -112,6 +113,8 @@ class ViewController: UIViewController, WKNavigationDelegate, CircularSliderDele
     
     func loadCameraView() {
         webView.navigationDelegate = self
+        webView.isUserInteractionEnabled = false
+        webView.scrollView.isScrollEnabled = false
         let url = URL(string: ip)!
         webView.load(URLRequest(url: url))
     }
@@ -125,8 +128,8 @@ class ViewController: UIViewController, WKNavigationDelegate, CircularSliderDele
     @IBAction func sensorButtonPressed(_ sender: Any) {
         self.viewModel?.getData(id: "10") { responseObject, error in
             self.dataModel = DataModel(JSON: responseObject!)
-            self.humidityLabel.text = " Humidity: " + (self.dataModel?.humidity)!
-            self.tempLabel.text = " Temperature: " + (self.dataModel?.temperature)!
+            self.humidityLabel.text = " Humidity: " + (self.dataModel?.humidity)! + "%"
+            self.tempLabel.text = " Temperature: " + (self.dataModel?.temperature)! + "°"
         }
     
     }
