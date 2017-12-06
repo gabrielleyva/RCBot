@@ -31,6 +31,8 @@ class ViewController: UIViewController, WKNavigationDelegate, CircularSliderDele
     @IBOutlet weak var humidityLabel: UILabel!
     @IBOutlet weak var transView: UIView!
     @IBOutlet weak var sensorButton: MDCRaisedButton!
+    @IBOutlet weak var startButton: MDCRaisedButton!
+    
     
     
 
@@ -40,28 +42,63 @@ class ViewController: UIViewController, WKNavigationDelegate, CircularSliderDele
     var dataModel: DataModel?
     var servoModel: ServoModel?
     var circleSlider: CircularSlider?
+    var hidden: Bool!
+    var start: Bool!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        hidden = false
+        start = true
+        
         self.loadCameraView()
         self.prepareMotionCalculator()
-        self.scheduledTimerWithTimeInterval()
         
         self.prepareSlider()
         self.prepareSensorButton()
         self.prepareTransView()
         self.prepareLabels()
+        self.prepareStartButton(bgColor: .newGreen, textColor: .white, title: "Start")
+        self.prepareDoubleTap()
         
         viewModel = ViewModel()
         servoModel = ServoModel()
   
     }
     
+    func prepareDoubleTap() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
+        tap.numberOfTapsRequired = 2
+        self.view.addGestureRecognizer(tap)
+    }
+    
+    @objc func doubleTapped() {
+        if hidden == false  {
+            self.tempLabel.isHidden = false
+            self.circleSlider?.isHidden = false
+            self.humidityLabel.isHidden = false
+            self.transView.isHidden = false
+            self.sensorButton.isHidden = false
+            self.startButton.isHidden = false
+            hidden = true
+            
+        } else {
+            self.tempLabel.isHidden = true
+            self.circleSlider?.isHidden = true
+            self.humidityLabel.isHidden = true
+            self.transView.isHidden = true
+            self.sensorButton.isHidden = true
+            self.startButton.isHidden = true
+            hidden = false
+        }
+    }
+    
     func prepareLabels() {
         tempLabel.textColor = .newRed
         humidityLabel.textColor = .newRed
     }
+    
+    
     
     func prepareTransView() {
         transView.backgroundColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.5)
@@ -71,6 +108,12 @@ class ViewController: UIViewController, WKNavigationDelegate, CircularSliderDele
     func prepareSensorButton() {
         sensorButton.backgroundColor = .newGreen
         sensorButton.setTitleColor(.white, for: .normal)
+    }
+    
+    func prepareStartButton(bgColor: UIColor, textColor: UIColor, title: String ) {
+        startButton.backgroundColor = bgColor
+        startButton.setTitleColor(textColor, for: .normal)
+        startButton.setTitle(title, for: .normal)
     }
     
     func prepareSlider() {
@@ -132,6 +175,19 @@ class ViewController: UIViewController, WKNavigationDelegate, CircularSliderDele
         }
     
     }
+    
+    @IBAction func startButtonPressed(_ sender: Any) {
+        if start == true {
+            self.scheduledTimerWithTimeInterval()
+            self.prepareStartButton(bgColor: .newRed, textColor: .white, title: "Stop")
+            start = false
+        } else {
+            timer.invalidate()
+            self.prepareStartButton(bgColor: .newGreen, textColor: .white, title: "Start")
+            start = true
+        }
+    }
+    
     
     func circularSlider(_ circularSlider: CircularSlider, valueForValue value: Float) -> Float {
         self.servoModel?.angle = Int(value)
