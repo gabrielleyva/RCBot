@@ -22,7 +22,7 @@ import CoreMotion
 import ObjectMapper
 import CircularSlider
 
- var ip = "http://10.8.70.55:5000"
+ var ip = "http://192.168.43.187:5000"
 
 class ViewController: UIViewController, WKNavigationDelegate, CircularSliderDelegate{
 
@@ -102,8 +102,7 @@ class ViewController: UIViewController, WKNavigationDelegate, CircularSliderDele
     
     @objc func updateMotion(){
         let data = motionCalculator?.getJSON()
-        viewModel?.updateMotion(parameters: data!)
-        
+        viewModel?.updateMotion(parameters: data!)        
     }
     
     func prepareMotionCalculator() {
