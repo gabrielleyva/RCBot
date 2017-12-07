@@ -22,7 +22,8 @@ import CoreMotion
 import ObjectMapper
 import CircularSlider
 
- var ip = "http://192.168.43.187:5000"
+//192.168.43.187:5000
+ var ip = "http://192.168.1.90:5000"
 
 class ViewController: UIViewController, WKNavigationDelegate, CircularSliderDelegate{
 
@@ -46,6 +47,7 @@ class ViewController: UIViewController, WKNavigationDelegate, CircularSliderDele
     var start: Bool!
     var angleLabel: UILabel?
     var dir:MotionCalculator.Direction = MotionCalculator.Direction.stopped
+    var currentAngle: Int!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,6 +57,7 @@ class ViewController: UIViewController, WKNavigationDelegate, CircularSliderDele
         
         viewModel = ViewModel()
         servoModel = ServoModel()
+        currentAngle = servoModel?.angle
         
         self.prepareMotionCalculator()
         
@@ -153,6 +156,16 @@ class ViewController: UIViewController, WKNavigationDelegate, CircularSliderDele
         // Dispose of any resources that can be recreated.
     }
     
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("did end")
+        if currentAngle != servoModel?.angle {
+            currentAngle = servoModel?.angle
+            let data = self.getJSON()
+            print(data)
+            viewModel?.rotateServo(parameters: data)
+        }
+    }
+    
     func scheduledTimerWithTimeInterval(){
      timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(self.updateMotion), userInfo: nil, repeats: true)
     }
@@ -217,9 +230,6 @@ class ViewController: UIViewController, WKNavigationDelegate, CircularSliderDele
     
     func circularSlider(_ circularSlider: CircularSlider, valueForValue value: Float) -> Float {
         self.servoModel?.angle = Int(value)
-        let data = self.getJSON()
-        print(data)
-        viewModel?.rotateServo(parameters: data)
         self.angleLabel?.text = String(describing: (servoModel?.angle)!) + "°"
         return floorf(value)
     }
