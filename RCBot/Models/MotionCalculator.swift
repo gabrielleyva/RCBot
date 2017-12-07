@@ -33,6 +33,7 @@ class MotionCalculator: NSObject {
         case right
         case stopped
     }
+    var dir:Direction = Direction.stopped
     
     let motionManager = CMMotionManager()
     let motionQueue = OperationQueue()
@@ -48,42 +49,42 @@ class MotionCalculator: NSObject {
             let xz = acos( data.x / ( pow(data.x,2) + pow(data.z,2) ).squareRoot()  ) * 180 / Double.pi
             let xy = acos( data.x / ( pow(data.x,2) + pow(data.y,2) ).squareRoot() ) * 180 / Double.pi
             self.motionModel?.updateValues(f: false, re: false, l: false, r: false, s: true)
-
+            dir = Direction.stopped
             if  ((xy < 20) || (xy > 160))  {
                 if data.x > 0 {
                     if xz > 50 {
-                        //dir = Direction.forward
+                        dir = Direction.forward
                         self.motionModel?.updateValues(f: true, re: false, l: false, r: false, s: false)
                     }else if xz < 20{
-                        //dir = Direction.reverse
+                        dir = Direction.reverse
                         self.motionModel?.updateValues(f: false, re: true, l: false, r: false, s: false)
                     }
                 }else {
                     if xz < 130 {
-                        //dir = Direction.forward
+                        dir = Direction.forward
                         self.motionModel?.updateValues(f: true, re: false, l: false, r: false, s: false)
                     }else if xz > 160{
-                        //dir = Direction.reverse
+                        dir = Direction.reverse
                         self.motionModel?.updateValues(f: false, re: true, l: false, r: false, s: false)
                     }
                 }
             }else{
                 if data.x > 0 {
                     if data.y < 0 {
-                        //dir = Direction.left
+                        dir = Direction.left
                         self.motionModel?.updateValues(f: false, re: false, l: true, r: false, s: false)
 
                     }else{
-                        //dir = Direction.right
+                        dir = Direction.right
                         self.motionModel?.updateValues(f: false, re: false, l: false, r: true, s: false)
 
                     }
                 }else {
                     if data.y > 0 {
-                        //dir = Direction.left
+                        dir = Direction.left
                         self.motionModel?.updateValues(f: false, re: false, l: true, r: false, s: false)
                     }else{
-                        //dir = Direction.right
+                        dir = Direction.right
                         self.motionModel?.updateValues(f: false, re: false, l: false, r: true, s: false)
                     }
                 }
@@ -102,6 +103,10 @@ class MotionCalculator: NSObject {
         let JSON = convertToDictionary(text: JSONString!)
    
         return JSON!
+    }
+    
+    func getDriection() -> Direction {
+        return dir
     }
     
     func convertToDictionary(text: String) -> [String: Any]? {

@@ -44,12 +44,17 @@ class ViewController: UIViewController, WKNavigationDelegate, CircularSliderDele
     var circleSlider: CircularSlider?
     var hidden: Bool!
     var start: Bool!
+    var angleLabel: UILabel?
+    var dir:MotionCalculator.Direction = MotionCalculator.Direction.stopped
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         hidden = false
         start = true
+        
+        viewModel = ViewModel()
+        servoModel = ServoModel()
         
         self.loadCameraView()
         self.prepareMotionCalculator()
@@ -60,10 +65,8 @@ class ViewController: UIViewController, WKNavigationDelegate, CircularSliderDele
         self.prepareLabels()
         self.prepareStartButton(bgColor: .newGreen, textColor: .white, title: "Start")
         self.prepareDoubleTap()
-        
-        viewModel = ViewModel()
-        servoModel = ServoModel()
-  
+        self.prepareAngleLabel()
+    
     }
     
     func prepareDoubleTap() {
@@ -130,10 +133,22 @@ class ViewController: UIViewController, WKNavigationDelegate, CircularSliderDele
         circleSlider?.pgHighlightedColor = .newBlue
         circleSlider?.tintColor = .newBlue
         circleSlider?.knobRadius = 50
+        circleSlider?.hideLabels = true
         
         self.view.addSubview(circleSlider!)
     }
-
+    
+    func prepareAngleLabel() {
+        let frame = CGRect(x: 0, y:  ((self.circleSlider?.frame.size.height)!  - 50) / 2, width: 200, height: 50)
+        angleLabel = UILabel(frame: frame)
+        angleLabel?.text = String(describing: (servoModel?.angle)!) + "°"
+        angleLabel?.font = UIFont.systemFont(ofSize: 50)
+        angleLabel?.textColor = .darkGray
+        angleLabel?.textAlignment = .center
+        
+        self.circleSlider!.addSubview(angleLabel!)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -145,7 +160,11 @@ class ViewController: UIViewController, WKNavigationDelegate, CircularSliderDele
     
     @objc func updateMotion(){
         let data = motionCalculator?.getJSON()
-        viewModel?.updateMotion(parameters: data!)        
+        let dir = motionCalculator?.getDriection()
+        if (dir != self.dir){
+            viewModel?.updateMotion(parameters: data!)
+            self.dir = dir!
+        }
     }
     
     func prepareMotionCalculator() {
@@ -165,6 +184,7 @@ class ViewController: UIViewController, WKNavigationDelegate, CircularSliderDele
     override func viewWillDisappear(_ animated: Bool) {
         super .viewWillDisappear(true)
         self.motionCalculator?.motionManager.stopDeviceMotionUpdates()
+        
     }
     
     @IBAction func sensorButtonPressed(_ sender: Any) {
@@ -179,12 +199,18 @@ class ViewController: UIViewController, WKNavigationDelegate, CircularSliderDele
     @IBAction func startButtonPressed(_ sender: Any) {
         if start == true {
             self.scheduledTimerWithTimeInterval()
+            self.motionCalculator?.didInit()
             self.prepareStartButton(bgColor: .newRed, textColor: .white, title: "Stop")
             start = false
         } else {
             timer.invalidate()
             self.prepareStartButton(bgColor: .newGreen, textColor: .white, title: "Start")
             start = true
+            self.motionCalculator?.motionManager.stopDeviceMotionUpdates()
+            self.motionCalculator?.motionModel?.updateValues(f: false, re: false, l: false, r: false, s: true)
+            let data = motionCalculator?.getJSON()
+            viewModel?.updateMotion(parameters: data!)
+            
         }
     }
     
@@ -194,6 +220,7 @@ class ViewController: UIViewController, WKNavigationDelegate, CircularSliderDele
         let data = self.getJSON()
         print(data)
         viewModel?.rotateServo(parameters: data)
+        self.angleLabel?.text = String(describing: (servoModel?.angle)!) + "°"
         return floorf(value)
     }
     
