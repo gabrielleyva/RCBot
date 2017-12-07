@@ -56,7 +56,6 @@ class ViewController: UIViewController, WKNavigationDelegate, CircularSliderDele
         viewModel = ViewModel()
         servoModel = ServoModel()
         
-        self.loadCameraView()
         self.prepareMotionCalculator()
         
         self.prepareSlider()
@@ -201,6 +200,7 @@ class ViewController: UIViewController, WKNavigationDelegate, CircularSliderDele
             self.scheduledTimerWithTimeInterval()
             self.motionCalculator?.didInit()
             self.prepareStartButton(bgColor: .newRed, textColor: .white, title: "Stop")
+             self.loadCameraView()
             start = false
         } else {
             timer.invalidate()

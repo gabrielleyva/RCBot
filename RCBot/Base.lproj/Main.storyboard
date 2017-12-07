@@ -18,9 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6GN-gi-cDY">
-                                <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6GN-gi-cDY">
+                                <rect key="frame" x="-15" y="-15" width="697" height="390"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -80,11 +79,15 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="6GN-gi-cDY" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="-15" id="1Ci-xE-X5D"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="S4X-OY-VRj" secondAttribute="trailing" constant="20" id="1JN-lZ-7ff"/>
                             <constraint firstItem="5Ps-iC-AFU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="7WU-jf-N5v"/>
+                            <constraint firstAttribute="trailing" secondItem="6GN-gi-cDY" secondAttribute="trailing" constant="-15" id="C5B-cY-61H"/>
                             <constraint firstItem="5Ps-iC-AFU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="CeR-kp-b7c"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="aXS-H5-QTR" secondAttribute="bottom" constant="20" id="a34-3u-U0N"/>
+                            <constraint firstItem="6GN-gi-cDY" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="c94-OU-njI"/>
                             <constraint firstItem="S4X-OY-VRj" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="qB5-QP-K3M"/>
+                            <constraint firstItem="6GN-gi-cDY" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="-15" id="qn6-uQ-BfM"/>
                             <constraint firstItem="aXS-H5-QTR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="uZU-mZ-L66"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
