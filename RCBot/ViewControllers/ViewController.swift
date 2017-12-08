@@ -23,10 +23,11 @@ import ObjectMapper
 import CircularSlider
 
 //192.168.43.187:5000
- var ip = "http://192.168.1.90:5000"
+ var ip = "http://192.168.43.187:5000"
 
 class ViewController: UIViewController, WKNavigationDelegate, CircularSliderDelegate{
 
+    @IBOutlet weak var hideView: UIView!
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var tempLabel: UILabel!
     @IBOutlet weak var humidityLabel: UILabel!
@@ -52,7 +53,7 @@ class ViewController: UIViewController, WKNavigationDelegate, CircularSliderDele
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        hidden = false
+        hidden = true
         start = true
         
         viewModel = ViewModel()
@@ -74,10 +75,12 @@ class ViewController: UIViewController, WKNavigationDelegate, CircularSliderDele
     func prepareDoubleTap() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(doubleTapped))
         tap.numberOfTapsRequired = 2
-        self.view.addGestureRecognizer(tap)
+        self.view.isUserInteractionEnabled = true
+        self.hideView.addGestureRecognizer(tap)
     }
     
     @objc func doubleTapped() {
+        print("Double Tap")
         if hidden == false  {
             self.tempLabel.isHidden = false
             self.circleSlider?.isHidden = false
